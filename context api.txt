@@ -1,0 +1,10 @@
+context api - :
+				(react app as state and components)jab app bada hota h and complexity badh jaate	
+				h.
+ 			context api is use to give  state to any level ....context api is lifting 
+ssare ke saare state bana lo object ke tarah so it is headache to send state as the props 
+waste of data ...XXX
+
+and here where the context api comes in picture--->
+eg
+create a context color - create context then  any deep tree. and many context can be created

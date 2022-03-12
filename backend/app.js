@@ -2,12 +2,9 @@ const connectomongo = require("./db");
 connectomongo();
 const express = require("express");
 const app = express();
-// var bodyParser = require("body-parser");
-// app.use(
-// 	express.urlencoded({
-// 		extended: true,
-// 	})
-// );
+const cors = require("cors");
+app.use(cors());
+
 const port = 5000;
 
 app.use(express.json());
