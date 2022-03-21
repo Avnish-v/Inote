@@ -18,6 +18,7 @@ const NoteItem = props => {
 							aria-hidden="true"
 							onClick={() => {
 								deleteNote(note._id);
+								props.showAlert("note is deleted ", "danger")
 							}}
 						></i>
 						<i className="fa fa-pencil-square-o mx-2" onClick={() => { updateNote(note) }} aria-hidden="true"></i>

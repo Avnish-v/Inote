@@ -53,7 +53,7 @@ const NoteState = props => {
 					localStorage.getItem("token")
 			},
 		});
-		const json = await response.json();
+		// const json = await response.json();
 
 		const newNotes = notes.filter(note => {
 			return note._id !== id;

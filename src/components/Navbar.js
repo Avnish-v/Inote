@@ -1,13 +1,14 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
-function Navbar() {
+function Navbar(props) {
 	let history = useNavigate();
 	let location = useLocation();
 	// useEffect(() => {}, [location]);
 	const logout = () => {
 		localStorage.removeItem("token");
 		history("/login")
+		props.showAlert("logut sucessfully done", "danger")
 	}
 	return (
 		<>

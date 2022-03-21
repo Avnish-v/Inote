@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 const host = "http://localhost:5000";
 
-const SignUp = () => {
+const SignUp = (props) => {
     let history = useNavigate();
     const [id, setid] = useState({ name: "", email: "", password: "" });
 
@@ -22,10 +22,14 @@ const SignUp = () => {
         let json = await response.json();
         console.log("this is the response", json.AuthToken)
         if (json.sucess) {
-            localStorage.setItem("token", json.AuthToken);
-            history("/")
+            // localStorage.setItem("token", json.AuthToken);
+
+            history("/login")
+            props.showAlert("user created sucessfully", 'success');
+
         } else {
-            alert("unable")
+            props.showAlert("User Already Exists ", 'danger');
+
         }
 
     }
