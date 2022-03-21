@@ -3,9 +3,9 @@ import notecontext from "../context/notes/NoteContext";
 
 const NoteItem = props => {
 	const context = useContext(notecontext);
-	const { deleteNote } = context;
+	const { deleteNote, } = context;
 
-	const { note } = props;
+	const { note, updateNote } = props;
 
 	return (
 		<>
@@ -20,7 +20,7 @@ const NoteItem = props => {
 								deleteNote(note._id);
 							}}
 						></i>
-						<i className="fa fa-pencil-square-o mx-2" aria-hidden="true"></i>
+						<i className="fa fa-pencil-square-o mx-2" onClick={() => { updateNote(note) }} aria-hidden="true"></i>
 					</div>
 					<p className="card-text">{note.description}</p>
 				</div>

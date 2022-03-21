@@ -1,37 +1,24 @@
-import React from "react";
+import React from 'react'
 
-import PropTypes from "prop-types";
+function Alert(props) {
+	const capitalize = (word) => {
+		if (word === "danger") {
+			word = "error"
+			const lower = word.toLowerCase();
+			return lower.charAt(0).toUpperCase() + lower.slice(1);
 
-// #region constants
-
-// #endregion
-
-// #region styled-components
-
-// #endregion
-
-// #region functions
-
-// #endregion
-
-// #region component
-const propTypes = {};
-
-const defaultProps = {};
-
-/**
- *
- */
-const Alert = props => {
+		}
+	}
 	return (
-		<div className="alert alert-primary" role="alert">
-			{props.msg}
-		</div>
-	);
-};
- 
-Alert.propTypes = propTypes;
-Alert.defaultProps = defaultProps;
-// #endregion
 
-export default Alert;
+
+		<div style={{ height: '50px' }}>
+
+			{props.alert && <div className={`alert alert-${props.alert.type} alert-dismissible fade show`} role="alert">
+				<strong>{capitalize(props.alert.type)}</strong>: {props.alert.msg}
+			</div>}
+		</div>
+	)
+}
+
+export default Alert

@@ -45,7 +45,10 @@ router.post(
 			res.json(savednotes);
 			console.log("thie is saved note", savednotes);
 		} catch (error) {
-			res.status(401).json({ error: "internal server error" });
+			console.log('this is the error',error);
+			
+			
+			res.status(401).json({ error});
 		}
 	}
 );
@@ -99,8 +102,9 @@ router.delete("/deletion/:id", fetchuser, async (req, res) => {
 			res.json({ sucess: "deletion as been done thankyou keep using" });
 		}
 	} catch (error) {
-		console.log("internal server error");
-		res.send("internal server error");
+		console.log("internal server error",error);
+		res.json({error})
+		
 	}
 });
 

@@ -17,6 +17,7 @@ router.post(
 		body("name").isLength({ min: 3 }),
 	],
 	async (req, res) => {
+		let sucess = false;
 		const err = validationResult(req);
 		if (!err.isEmpty()) {
 			return res.status(400).json({ errors: err.array() });
@@ -28,8 +29,8 @@ router.post(
 			console.log(user);
 			if (user !== null) {
 				return res
-					.status(400)
-					.json({ error: "please enter the correct credential" });
+					.status(200)
+					.json({ sucess, error: "User already exists" });
 			}
 			const salt = await bcrypt.genSalt(10);
 			const secpass = await bcrypt.hash(req.body.password, salt);
@@ -42,8 +43,8 @@ router.post(
 				id: user.id,
 			};
 			const AuthToken = jwt.sign(data, jwt_sc);
-
-			res.json({ AuthToken });
+			sucess = true;
+			res.json({ sucess, AuthToken });
 		} catch (error) {
 			console.error("something is wrong", error);
 			res.status(500).send("Internal Server Error");
@@ -58,6 +59,7 @@ router.post(
 		body("password", "password can not be blank").exists(),
 	],
 	async (req, res) => {
+		let sucess = false;
 		const err = validationResult(req);
 		if (!err.isEmpty()) {
 			return res.status(400).json({ errors: err.array() });
@@ -72,9 +74,10 @@ router.post(
 			}
 			const passwordcompare = await bcrypt.compare(password, user.password);
 			if (!passwordcompare) {
+				sucess = false;
 				return res
 					.status(400)
-					.json({ error: "Please try to login with correct credentials" });
+					.json({ sucess, error: "Please try to login with correct credentials" });
 			}
 			const data = {
 				user: {
@@ -82,7 +85,9 @@ router.post(
 				},
 			};
 			const AuthToken = jwt.sign(data, jwt_sc);
-			res.json({ AuthToken });
+			sucess = true;
+
+			res.json({ sucess, AuthToken });
 		} catch (error) {
 			console.error(error.message);
 			res.status(500).send("Internal Server Error");
